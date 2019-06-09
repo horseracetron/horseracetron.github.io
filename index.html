@@ -4,19 +4,104 @@
 <link rel="stylesheet" href="./css/menu.min.css">
 <link rel="stylesheet" href="./css/dropdown.min.css">
 <style>
-
 @font-face {
-    font-family: "myfont";
-    src: url("./PressStart2P.woff") format('woff');
+    font-family: "mario-font";
+    src: url("./mario-font.woff") format('woff');
 }
 
-* {
-  font-family: myfont    
+h2 {
+  font-family: mario-font    
+}	
+	
+*, h3, h4 {
+  font-size:10px;	 
+  font-family: mario-font    
 }
-body > div.ui.four.item.massive.menu {
+	
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  border:2px solid white;
+  border-radius: 50%;
+  display: block;
+}
+.rec {
+  height: 25px;
+  width: 3px;
+  background-color: white;
+  margin-left:6px;
+  display: block;
+}
+body > div.tronHorses > div.ui.six.item.massive.menu {
   min-width:2000px;
 }
-
+body {
+  background-color: #338c00;
+  background-image: url('./45-degree-fabric-dark.png');
+  overflow:auto;	
+}
+.tronHorses {
+  display:block;  
+}  
+.loading {
+	display:none;
+  padding-top:20%;
+  width:100%;
+  height:100%;
+  background: #222;
+  text-align: center;
+  text-transform:uppercase;
+}
+.loading h2 {
+  color: #ccc;
+  margin: 0;
+  font: .8em verdana;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+.loading span {
+  display: inline-block;
+  vertical-align: middle;
+  width: .6em;
+  height: .6em;
+  margin: .19em;
+  background: #007DB6;
+  border-radius: .6em;
+  animation: loading 1s infinite alternate;
+}
+.loading span:nth-of-type(2) {
+  background: #008FB2;
+  animation-delay: 0.2s;
+}
+.loading span:nth-of-type(3) {
+  background: #009B9E;
+  animation-delay: 0.4s;
+}
+.loading span:nth-of-type(4) {
+  background: #00A77D;
+  animation-delay: 0.6s;
+}
+.loading span:nth-of-type(5) {
+  background: #00B247;
+  animation-delay: 0.8s;
+}
+.loading span:nth-of-type(6) {
+  background: #5AB027;
+  animation-delay: 1.0s;
+}
+.loading span:nth-of-type(7) {
+  background: #A0B61E;
+  animation-delay: 1.2s;
+}
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}   
 .hodl {
   color:white!important;
 }
@@ -26,7 +111,7 @@ body > div.ui.four.item.massive.menu {
 .moontrot {
   color:blue!important;
 }
-.sundagun {
+.sonofagun {
   color:yellow!important;
 }
 .intome {
@@ -42,14 +127,9 @@ body > div.ui.four.item.massive.menu {
   color:pink!important;
 }
 
-body {
-  background-color: #338c00;
-  background-image: url('./45-degree-fabric-dark.png');
-  overflow: auto;
-}
 
 .fences {
-  width:99%;
+  width:99.5%;
   float:right;
 }
 
@@ -63,7 +143,10 @@ body {
   width:2000px;
   margin:auto;
 }
-
+#pressMagicButton {
+  color:red;	
+  cursor:pointer;	
+}	
 #racecourse {
   height:100%;
   width:88%;
@@ -126,59 +209,152 @@ body {
 }
 .ui.segment {
   width:100%;
-  height:100%;
   background-image: url('./45-degree-fabric-dark.png');
   background-color: black;
 }
 .item {
   color:white!important;
 }
-
-
+.item.playerCard {
+  font-size:12px;
+  margin-bottom:10%;
+}  
+.ui.action.input {
+   width:50%;
+   margin-top:5%;
+}  
 .item.numberCard.container {
   width:500px;
   height:100px;
 }
 </style>
-</head>
+</head> 
 <body>
-  <div class="ui four item massive menu" style="background-color:black;background-image: url('./45-degree-fabric-dark.png');">
-    <div class="item" style="text-transform:uppercase;">
-      Tronhorses
-    </div>
+<audio id="horsesRunning" src="./js/galloping.wav" type="audio/wav"></audio>
+<audio id="fanfare" src="./js/race_horn.mp3" type="audio/mpeg"></audio>
+<audio id="crowdCheers" src="./js/crowd_cheer.mp3" type="audio/mpeg"></audio>	
+ <div class="loading">
+  <h2>Loading TronHorses</h2>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>  
+ <div class="tronHorses">
+  <div class="ui six item massive menu" style="background-color:black;background-image: url('./45-degree-fabric-dark.png');">
+    <div class="item">
+      <img src="image1.png" style="width:300px;height:70px;">	    
+    </div>	    
     <div class="item">
       <div class="ui dropdown">
        <div class="text">English</div>
          <i class="dropdown icon"></i>
+         <div class="menu">
+           <div class="item">
+             <a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en">English</a>
+           </div>
+           <div class="item">
+             <a href="#googtrans(en|zh-CN)" class="lang-en lang-select" data-lang="zh-CN">Chinese</a>
+           </div>
+           <div class="item">
+             <a href="#googtrans(en|es)" class="lang-en lang-select" data-lang="es">Spanish</a>
+           </div>
+         </div>
        </div>
     </div>
+    <div class="item" style="cursor:pointer;">
+         <div class="text" style="cursor:pointer;" id="historyTab">History</div>
+    </div>
+<div class="item" style="cursor:pointer;">
+         <div class="text" style="cursor:pointer;" id="winningsTab">Winnings</div>
+    </div>	  
     <div class="item">
-      Dividends
+         <div class="header" style="cursor:pointer;">Help</div>  
     </div>
     <div class="item">
-       <div class="ui dropdown">
-         <div class="text">Help</div>
-         <i class="dropdown icon"></i>
-       </div>
-    </div>
-  </div>
+         <div class="header" style="cursor:pointer;"><a href="https://t.me/joinchat/E3BK1g_aw8KZS0SjAN9NXA" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1200px-Telegram_logo.svg.png" style="width:50px;height:50px;"></a></div>  
+    </div>	  
+  </div>	 
+  <div style="width:2000px;height:25px;margin:auto;">	 
+    <div style="width:15px;float:right;margin-right:15px;">
+      <div class="dot"></div>
+      <div class="rec"></div>  
+    </div>	 
+ </div>	  
   <div class="gameContainer">
   <div class="left-container" id="menu" style="margin-top:15px;">
     <div class="ui segment">
-      <h3><span style="color:white;text-decoration: underline;">Bookee</span></h3>
-      <div class="item playerCard"><span class="hodl">1. Hodl Me - $</span></div>
-      <div class="item playerCard"><span class="trong">2. Too Trong - $</span></div>
-      <div class="item playerCard"><span class="moontrot">3. Moontrot - $</span></div>
-      <div class="item playerCard"><span class="sundagun">4. Sundagun - $</span></div>
-      <div class="item playerCard"><span class="intome">5. Just Into Me - $</span></div>
-      <div class="item playerCard"><span class="trxmaster">6. Trxmaster - $</span></div>
-      <div class="item playerCard"><span class="tronx">7. Tronx - $</span></div>
-      <div class="item playerCard"><span class="luckylady">8. Lucky Lady - $</span></div>
-      <div class="ui divider" style="background-color: white !important;"></div>
-      <h3><span style="color:white;text-decoration: underline;">Chatroom</span></h3>
+      <h3><span style="color:white;text-decoration: underline;">Bookie</span></h3>
+      <h4><span id="pressMagicButton"></span></h4>  	      
+      <div class="item" style="margin-bottom:1rem;">
+        <div>Round Number: <span id="roundNumber"></span></div>  
+        <div>Round State: <span id="roundState"></span></div>  
+        <div>Round Time: <span id="roundTime"></span></div>  
+        <div>Pot: <span id="roundPot"></span> TRX</div>  
+        <div><span class="txHash"></span></div>  
+      </div>  
+      <div class="item playerCard" id="0">
+        <div><span class="hodl">1. Hodl Me - <span id="betValueWager_0"></span> TRX</span> - <span id="odds_0"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>
+      <div class="item playerCard" id="1">
+        <div><span class="trong">2. Too Trong - <span id="betValueWager_1"></span> TRX</span> - <span id="odds_1"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>
+      <div class="item playerCard" id="2">
+        <div><span class="moontrot">3. Moontrot - <span id="betValueWager_2"></span> TRX</span> - <span id="odds_2"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>  
+      <div class="item playerCard" id="3">
+        <div><span class="sonofagun">4. Sonofagun - <span id="betValueWager_3"></span> TRX</span> - <span id="odds_3"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div> 
+      <div class="item playerCard" id="4">
+        <div><span class="intome">5. Justin Time - <span id="betValueWager_4"></span> TRX</span> - <span id="odds_4"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>  
+      <div class="item playerCard" id="5">
+        <div><span class="trxmaster">6. Trxmaster - <span id="betValueWager_5"></span> TRX</span> - <span id="odds_5"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>  
+      <div class="item playerCard" id="6">
+        <div><span class="tronx">7. Tronx - <span id="betValueWager_6"></span> TRX</span> - <span id="odds_6"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>   
+      <div class="item playerCard" id="7">
+        <div><span class="luckylady">8. Lucky Lady - <span id="betValueWager_7"></span> TRX</span> - <span id="odds_7"></span></div>
+        <div class="ui action input">
+          <input type="number" min="0">
+          <button class="ui button">Submit</button>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="right-container" id="racecourse">
+  </div>	  
+  <div class="right-container" id="racecourse">	  
     <div class="fences">
     <img src="./white fence - 8000x1904.png">
     <img src="./white fence - 8000x1904.png">
@@ -199,8 +375,8 @@ body {
     <img src="./white fence - 8000x1904.png">
     <img src="./white fence - 8000x1904.png">
     <img src="./white fence - 8000x1904.png">
-    <img src="./white fence - 8000x1904.png">
-  </div>
+    <img src="./white fence - 8000x1904.png">	    	    
+    </div>
     <div class="ui segment" id="main">
       <div class="wrapper">
         <div class="item numberCard container" id="container_0">
@@ -254,15 +430,116 @@ body {
       </div>
     </div>
   </div>
-</div>
-<script src="./js/jquery-3.2.0.min.js"></script>
-<script src="./js/bignumber.min.js"></script>
-<script src="./js/async.min.js"></script>
-<script src="./js/semantic.min.js"></script>
+ </div>
+ <div class="ui basic small modal" id="winnings">
+  <div class="ui icon header">
+  </div>  
+  <table class="ui selectable inverted table">
+  <thead>
+    <tr>
+      <th class="center aligned">Dividends</th>
+      <th class="center aligned">Round Winnings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center aligned"><span class="amountDiv">0 TRX</span></td>
+      <td class="center aligned"><span class="amountWon">0 TRX</span></td>
+    </tr>
+  </tbody>
+</table>	 
+  <div style="width:100%">
+    <div style="width:45%;float:left;text-align:center;">	  
+      <div class="ui green ok inverted button" style="text-transform:uppercase;" id="withdrawDivs">Withdraw</div>
+    </div>
+    <div style="width:45%;float:right;text-align:center;margin-right:5%">	  
+      <div class="ui green ok inverted button" style="text-transform:uppercase;" id="withdrawWinnings">Withdraw</div>
+    </div>	  
+  </div>	   	   
+ </div>    
+ <div class="ui basic small modal" id="help">
+  <div class="content" style="color:green;">
+    <p>
+		  <h2>	How to Play:</h2>
+
+<br>1. Pick a horse 
+<br>2. Place a bet - Enter trx amount and click submit & approve transaction.
+<br>3. Cheer for your Horse - Usually the louder you scream, the faster it runs.
+		  <br>4. Winner takes the pot or Winners split the pot proportionally depending on bet amount.</br>
+
+		  <h2>How the wealth is shared on Tronhorses: </h2>
+
+<br>- 70% of the bet goes to the winner/s pot up for grabs
+<br>- 20% is added to the next round pot
+<br>- 5% is paid in dividends to the bettor
+<br>- 5% is paid to Tronhorses for admin fees</br>
+<br>Bonus** Click the Claim Free TRX button to collect 1% of Pot each round - first click takes the prize
+
+<br>We will be actively reviewing and updating Tronhorses to improve the betting experience and ensure longevity of the site. The stablechat function allows the users to communicate with their naaybours whilst also giving the ability to express wishes/concerns to the team. Looking forward to building a fun, fair and respectable group of people. We will see you on the track!	  
+	<br>Also note - IF you cant see complete track on your computer, please zoom out</br>		  
+          	</p>
+  </div>
+ </div> 
+ <div class="ui basic small modal" id="leaderBoards">
+  <div class="ui icon header" style="font-size:150px;">
+    Winner: <span id="roundWinner" style="font-size:100px!important">How To Play</span>
+  </div>
+ </div>
+ <div class="ui basic small modal" id="history">
+   <table class="ui selectable inverted table" id="historyTable">
+     <thead>
+       <tr>
+         <th class="center aligned">History</th>
+       </tr>
+     </thead>
+    <tbody>
+    </tbody>
+   </table>	  
+ </div>
+  <div id="footer" style="margin-top:6%">
+   Tronhorses © 2019 If you reside in a location where lottery, gambling, or betting over the internet is illegal, please do not click on anything related to these activities on this site. You must be 21 years of age to click on any gambling related items even if it is legal to do so in your location. Recognising that the laws and regulations involving online gaming are different everywhere, players are advised to check with the laws that exist within their own jurisdiction or region to ascertain the legality of the activities which are covered. The games provided by Tronhorses are based on blockchain, fair, and transparency. When you start playing these games, please take not that online gambling and lottery is an entertainment vehicle and that it carries with it a certain degree of financial risk. Players should be aware of these risks and govern themselves accordingly.
+  </div>
+</div>   
+<script src="/js/jquery-3.2.0.min.js"></script>
+<script src="/js/semantic.min.js"></script>
 <script src="./js/dropdown.min.js"></script>
 <script src="https://rawcdn.githack.com/cx20/gltf-test/1f4136576bae85542301326064ad817db2c14834/libs/three.js/r102dev/three.js"></script>
 <script src="https://rawcdn.githack.com/cx20/gltf-test/1f4136576bae85542301326064ad817db2c14834/libs/three.js/r102dev/controls/OrbitControls.js"></script>
 <script src="https://rawcdn.githack.com/cx20/gltf-test/1f4136576bae85542301326064ad817db2c14834/libs/three.js/r102dev/GLTFLoader.js"></script>
 <script type="text/javascript" src="./js/horses.js"></script>
+<script type="text/javascript">
+  $('body > div.tronHorses > div.ui.six.item.massive.menu > div:nth-child(3)').on('click', function() {
+    $('#history').modal('show');	
+  });	
+  $('body > div.tronHorses > div.ui.six.item.massive.menu > div:nth-child(4)').on('click', function() {
+    $('#winnings').modal('show');	
+  });	
+  $('body > div.tronHorses > div.ui.six.item.massive.menu > div:nth-child(5)').on('click', function() {
+    $('#help').modal('show');	
+  });	
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
+  }
+	function triggerHtmlEvent(element, eventName) {
+	  var event;
+	  if (document.createEvent) {
+		event = document.createEvent('HTMLEvents');
+		event.initEvent(eventName, true, true);
+		element.dispatchEvent(event);
+	  } else {
+		event = document.createEventObject();
+		event.eventType = eventName;
+		element.fireEvent('on' + event.eventType, event);
+	  }
+	}
+	$('.lang-select').click(function() {
+	  var theLang = $(this).attr('data-lang');
+	  $('.goog-te-combo').val(theLang);
+	  window.location = $(this).attr('href');
+	  location.reload();
+	});
+  $('.ui.dropdown').dropdown();
+</script>	
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>  
 </body>
 </html>
