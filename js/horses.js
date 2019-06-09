@@ -443,8 +443,8 @@ async function getLastTenWinners() {
     return timeDiff;
   }
 
-  async function getPot() {
-    let roundNumber = localStorage.getItem("roundNumber");
+  async function getPot(rndNum) {
+    let roundNumber = rndNum ? rndNum : localStorage.getItem("roundNumber");
     let roundInfo = await getRoundInfo({roundNumber:roundNumber});
     let netAmountBet = await getNetTotalAmountBet({roundNumber:roundNumber});
     let totalPot = parseInt(roundInfo.nextRoundBonus) + parseInt(netAmountBet);
@@ -603,6 +603,8 @@ const main = function() {
        enableInputAndButtons();
       $('#roundNumber').text(roundNumber + 1);
       $('#roundState').text('NEW_ROUND');
+      let potAmt = await interface.getPot(roundNumber + 1);
+      $('#roundPot').text(potAmt);
     } else if(parseInt(timeMinutes) >= 1 && parseInt(timeMinutes) < 6) {
         enableInputAndButtons();
         $('#roundState').text('MARKET_OPEN');
