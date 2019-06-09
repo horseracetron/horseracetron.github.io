@@ -556,7 +556,6 @@ const main = function() {
    for(let i = 0; i < 8; i++) {
      $('#betValueWager_' + i).text('0');
      $('#odds_' + i).text('0X');
-     $('#roundPot').text('0');
    }
  }
 
