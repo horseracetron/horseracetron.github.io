@@ -449,7 +449,7 @@ async function getLastTenWinners() {
     let netAmountBet = await getNetTotalAmountBet({roundNumber:roundNumber});
     let totalPot = parseInt(roundInfo.nextRoundBonus) + parseInt(netAmountBet);
     totalPot /= 1e6;
-    $('#roundPot').text(totalPot);
+    return totalPot;
   }
   async function placeBet(obj) {
     let userAddress = localStorage.getItem("userAddress");
@@ -607,10 +607,12 @@ const main = function() {
         enableInputAndButtons();
         $('#roundState').text('MARKET_OPEN');
         $('#roundNumber').text(roundNumber);
-        await interface.getPot();
+        let potAmt = await interface.getPot();
+        $('#roundPot').text(potAmt);
         await interface.getAmountWageredOnEachHorse();
     }  else if(parseInt(timeSeconds) > 0 && parseInt(timeMinutes) < 1) {
-        await interface.getPot();
+        let potAmt = await interface.getPot();
+        $('#roundPot').text(potAmt);
         await interface.getAmountWageredOnEachHorse();
         disableInputAndButtons();
         $('#roundNumber').text(roundNumber);
